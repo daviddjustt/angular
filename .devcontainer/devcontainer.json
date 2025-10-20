@@ -1,0 +1,32 @@
+    {
+        "name": "Angular, NestJS & Docker Dev Container",
+        "dockerComposeFile": [
+            "../docker-compose.yml"
+        ],
+        "service": "backend",
+        "workspaceFolder": "/workspace/nest-backend",
+        "customizations": {
+            "vscode": {
+                "settings": {
+                    "terminal.integrated.defaultProfile.linux": "zsh",
+                    "editor.formatOnSave": true
+                },
+                "extensions": [
+                    "angular.ng-template",
+                    "esbenp.prettier-vscode",
+                    "dbaeumer.vscode-eslint",
+                    "firsttris.vscode-jest-runner",
+                    "nrwl.angular-console",
+                    "johnpapa.vscode-peacock",
+                    "mhutchie.git-graph"
+                ]
+            }
+        },
+        "forwardPorts": [
+            4200,
+            3000,
+            5432
+        ],
+        "postCreateCommand": "npm install --prefix ./angular-app && npm install --prefix ./nest-backend",
+        "remoteUser": "node"
+    }

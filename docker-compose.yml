@@ -1,0 +1,48 @@
+    version: '3.8'
+
+    services:
+      # Serviço para o backend NestJS
+      pet-market-be:
+        build:
+          context: .
+          dockerfile: .devcontainer/Dockerfile # Reutiliza o Dockerfile que criamos
+        volumes:
+          - .:/workspace:cached
+        working_dir: /workspace/apps/pet-market-be # Ajuste para o caminho do seu backend
+        ports:
+          - "3000:3000" # Porta do NestJS
+        command: npx nx serve pet-market-be # Comando para iniciar o NestJS em modo dev
+        environment:
+         - DATABASE_URL="postgresql://user:password@db:5432/mydb?schema=public"
+        depends_on:
+          - db
+          
+      # Serviço para o frontend Angular
+      #frontend:
+        #build:
+          #context: .
+          #dockerfile: .devcontainer/Dockerfile # Reutiliza o Dockerfile
+        #volumes:
+          #- .:/workspace:cached
+        #working_dir: /workspace/angular-app # Ajuste para o caminho do seu frontend
+        #ports:
+          #- "4200:4200" # Porta do Angular
+        #command: npm start # Comando para iniciar o Angular
+        #depends_on:
+          #- backend # O frontend depende do backend
+
+      # Exemplo de serviço de banco de dados (PostgreSQL)
+      db:
+       image: postgres:13
+       restart: always
+       environment:
+         POSTGRES_DB: mydb
+         POSTGRES_USER: user
+         POSTGRES_PASSWORD: password
+       ports:
+         - "5432:5432"
+       volumes:
+         - db_data:/var/lib/postgresql/data
+
+    volumes:
+      db_data:
