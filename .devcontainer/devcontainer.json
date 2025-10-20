@@ -3,7 +3,7 @@
         "dockerComposeFile": [
             "../docker-compose.yml"
         ],
-        "service": "backend",
+        "service": "pet-market-be",
         "workspaceFolder": "/workspace/nest-backend",
         "customizations": {
             "vscode": {
